@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+        <title>授权列表</title>
+
+        <link href="{$Think.const.CSS_URL}mine.css" type="text/css" rel="stylesheet" />
+    </head>
+    <body>
+        <style>
+        </style>
+        <div class="div_head">
+            <span>
+                <span style="float: left;">当前位置是：授权管理-》授权列表</span>
+            </span>
+        </div>
+        <div></div>
+        <div style="font-size: 13px;margin: 10px 5px">
+            <form action="__SELF__" method="post" enctype="multipart/form-data">  
+                <h2>当前权限：{$role_name}|{$role_auth_ids}</h2>
+                <ul style="list-style-type:none">
+                    <foreach name="pauth" item="v">
+                        <li style="list-style-type:none">
+                            {$v.auth_id}|{$v.auth_name}<input type="checkbox" name="auth_name[]" value={$v.auth_id} <in name="v.auth_id" value="{$role_auth_ids}">checked</in> />
+                        </li>
+                        <li style="list-style-type:none">
+                            <ul>
+                                <foreach name="sauth" item="vo">
+                                    <if condition="$vo['auth_pid'] eq $v['auth_id']">
+                                        <li style="list-style-type:none">                
+                                            {$vo.auth_name}<input type="checkbox" name="auth_name[]" value={$vo.auth_id} <in name="vo.auth_id" value="{$role_auth_ids}">checked</in>/>
+                                        </li>
+                                    </if>
+                                </foreach>
+                            </ul>
+                        </li>
+                    </foreach>
+                </ul>
+                <input type="submit" value="分配权限"/>
+            </form>
+        </div>
+    </body>
+</html>
