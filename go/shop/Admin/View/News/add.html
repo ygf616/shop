@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>添加新闻公告</title>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+        <link href="{$Think.const.CSS_URL}mine.css" type="text/css" rel="stylesheet">
+    </head>
+
+    <body>
+
+        <div class="div_head">
+            <span>
+                <span style="float:left">当前位置是：新闻公告管理-》添加新闻</span>
+                <span style="float:right;margin-right: 8px;font-weight: bold">
+                    <a style="text-decoration: none" href="showlist">【返回】</a>
+                </span>
+            </span>
+        </div>
+        <div></div>
+
+        <div style="font-size: 13px;margin: 10px 5px">
+            <form action="add" method="post" enctype="multipart/form-data">
+            <table border="1" width="100%" class="table_a">
+                <tr>
+                    <td>新闻名称</td>
+                    <td><input type="text" name="news_name" maxlength="50" style="width:830px"/></td>
+                </tr>
+                <tr>
+                    <td>新闻内容</td>
+                    <td>
+                        <textarea name="news_content" id="news_content" cols="100" rows="20" maxlength="50"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>新闻图片</td>
+                    <td><input type="file" name="news_img" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" value="发布新闻">
+                    </td>
+                </tr>  
+            </table>
+            </form>
+        </div>
+    </body>
+</html>

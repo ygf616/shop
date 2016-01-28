@@ -13,13 +13,19 @@ class LoginController extends AdminController {
             $where = array();
             $where['mg_name'] = $data['mg_name'];
             $result = $Login->where($where)->field('mg_id,mg_name,mg_pwd,mg_time,mg_role_id')->find();
-            
+
             // 验证用户名 对比 密码
             if ($result && $data['mg_pwd'] == $result['mg_pwd']) {
                 // 存储session
                 session('mg_id', $result['mg_id']);          // 当前用户id
                 session('mg_name', $result['mg_name']);   // 当前用户名
-                $this->success('登录成功,正跳转至系统首页...', U('Index/index'),3);
+                $verify = I('param.verify','');  
+                //if (check_verify($_POST['captcha'])) {
+                if (check_verify($verify)){
+                    $this->success('登录成功,正跳转至系统首页...', U('Index/index'), 3);
+                } else {
+                     $this->error('亲，验证码输错了哦！');
+                }
             } else {
                 $this->error('登录失败,用户名或密码不正确!');
             }
@@ -27,4 +33,14 @@ class LoginController extends AdminController {
             $this->display();
         }
     }
+
+    Public function verify() {
+        $Verify = new \Think\Verify();
+        $Verify->fontSize = 9;
+        $Verify->length = 4;
+        $Verify->useNoise = false;
+        $Verify->codeSet = '0123456789';  
+        $Verify->entry();
+    }
+
 }
